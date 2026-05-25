@@ -5,22 +5,24 @@ sequenceDiagram
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
     activate server
-    server-->>browser: Dokumen HTML dasar untuk SPA
+    server-->>browser: HTML document
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
-    server-->>browser: File CSS utama
+    server-->>browser: the css file
     deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.jsgi
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
     activate server
-    server-->>browser: File JavaScript khusus SPA (spa.js)
+    server-->>browser: the JavaScript file (spa.js)
     deactivate server
 
-    Note right of browser: Browser mengeksekusi spa.js yang langsung meminta raw data dari server
+    Note right of browser: The browser starts executing the spa.js code that fetches the JSON from the server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: Kumpulan data catatan berbentuk JSON
+    server-->>browser: [{ "content": "SPA is awesome", "date": "2026-05-25" }, ... ]
     deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes to the DOM using the DOM-API

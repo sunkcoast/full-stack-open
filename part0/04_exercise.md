@@ -1,36 +1,38 @@
 ```mermaid
-sequenceDiagram
+    sequenceDiagram
     participant browser
     participant server
 
-    Note over browser: Pengguna mengetik catatan dan mengeklik tombol 'Save'
+    Note over browser: User writes a note in the text field and clicks the Save button
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    Note over server: Server membaca data form, menambahkannya ke array 'notes',<br/>lalu menyiapkan instruksi URL redirect.
-    server-->>browser: HTTP Status 302 (Redirect ke /notes)
+    Note over server: Server saves the new note to the array and prepares a redirect
+    server-->>browser: HTTP Status 302 (URL Redirect to /notes)
     deactivate server
 
-    Note over browser: Terjadi interupsi redirect: Browser otomatis melakukan reload halaman ke rute baru
+    Note over browser: Browser reloads the notes page due to the redirect instruction
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
-    server-->>browser: Dokumen HTML dasar
+    server-->>browser: HTML document
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
-    server-->>browser: File CSS utama
+    server-->>browser: the css file
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
-    server-->>browser: File JavaScript utama
+    server-->>browser: the JavaScript file
     deactivate server
 
-    Note right of browser: Browser mengeksekusi main.js yang berisi perintah AJAX untuk mengambil data JSON
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: Data JSON terbaru (termasuk catatan baru yang tadi dibuat)
+    server-->>browser: [{ "content": "Your new note", "date": "2026-05-25" }, ... ]
     deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes to the DOM
