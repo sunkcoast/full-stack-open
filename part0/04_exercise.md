@@ -34,5 +34,3 @@ sequenceDiagram
     activate server
     server-->>browser: Data JSON terbaru (termasuk catatan baru yang tadi dibuat)
     deactivate server
-
-    Note right of browser: Browser mengeksekusi callback function yang menggunakan DOM API untuk merender data ke layar

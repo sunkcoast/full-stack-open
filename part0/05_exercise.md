@@ -13,7 +13,7 @@ sequenceDiagram
     server-->>browser: File CSS utama
     deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.jsgi
     activate server
     server-->>browser: File JavaScript khusus SPA (spa.js)
     deactivate server
@@ -24,5 +24,3 @@ sequenceDiagram
     activate server
     server-->>browser: Kumpulan data catatan berbentuk JSON
     deactivate server
-
-    Note right of browser: Browser menjalankan fungsi callback untuk membuat elemen HTML dan memanipulasi DOM tanpa me-reload halaman
